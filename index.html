@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FRC9562 PID Playground</title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div id="main-container">
+            <div id="config-container">
+                <div class="configurable-value">
+                    <label for="kP"><p>Proportional constant (kP):</p></label>
+                    <input type="text" id="kP" name="kP" placeholder="kP" value="0">
+                </div>
+                <div class="configurable-value">
+                    <label for="kI"><p>Integral constant (kI):</p></label>
+                    <input type="text" id="kI" name="kI" placeholder="kI" value="0">
+                </div>
+                <div class="configurable-value">
+                    <label for="iLimit"><p>I-Limit:</p></label>
+                    <input type="text" id="iLimit" name="iLimit" placeholder="I-Limit" value="0">
+                </div>
+                <div class="configurable-value">
+                    <label for="kD"><p>Derivative constant (kD):</p></label>
+                    <input type="text" id="kD" name="kD" placeholder="kD" value="0">
+                </div>
+            </div>
+            <div id="graph-container">
+                <canvas></canvas>
+            </div>
+        </div>
+
+        <script src="/pid.js"></script>
+        <script src="/main.js"></script>
+    </body>
+</html>

@@ -1,3 +1,2 @@
 # PID Playground
-**Built for FRC9562**
-PID Playground is a simple embeddable web game designed to teach the basics of PID tuning to FRC students. Users are given a simple simulated mechanical system and asked to tune a PID controller to reliably reach the setpoint.
+Built for FRC team 9562, PID Playground is a simple embeddable web game designed to teach the basics of PID tuning to FRC students. Users are given a simple simulated mechanical system and asked to tune a PID controller to reliably reach the setpoint.

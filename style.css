@@ -17,7 +17,8 @@ input[type=text] {
     outline: none;
     padding: 0.5em 0.5em 0.5em 0.5em;
     border-radius: 8px;
-    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
 }
 
 input[type=text]:focus {
@@ -51,9 +52,13 @@ input[type=text]:focus {
 
 .configurable-value {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: flex-start;
     align-items: center;
+}
+
+.configurable-value label {
+    margin-right: 1em;
 }
 
 .configurable-value input {

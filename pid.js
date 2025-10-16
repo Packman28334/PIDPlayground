@@ -5,6 +5,7 @@ class PIDController {
         this.kI = 0;
         this.iLimit = 0;
         this.kD = 0;
+        this.kFF = 0;
 
         this.setpoint = 0;
 
@@ -12,10 +13,18 @@ class PIDController {
 
         this.sumOfErrors = 0;
         this.lastError = 0;
+
+        this.simulatedSpeed = 0;
+        this.simulatedMomentumFactor = 0;
+        this.artificialErrorFactor = 0;
+        this.artificialErrorOffset = 0;
     }
 
-    setReference(setpoint, weight) {
+    setReference(setpoint, momentum, errorFactor, errorOffset) {
         this.setpoint = setpoint;
+        this.simulatedMomentumFactor = momentum;
+        this.artificialErrorFactor = errorFactor;
+        this.artificialErrorOffset = errorOffset;
     }
 
     calculateP(error) {
@@ -37,12 +46,14 @@ class PIDController {
 
     calculate(currentValue) {
         var error = this.setpoint - currentValue;
-        var correction = this.calculateP(error)*this.kP + this.calculateI(error)*this.kI + this.calculateD(error)*this.kD;
-        console.log([error, correction]);
-        return currentValue + correction;
+        var correction = this.calculateP(error)*this.kP + this.calculateI(error)*this.kI + this.calculateD(error)*this.kD + this.kFF;
+        correction = correction*this.artificialErrorFactor + this.artificialErrorOffset;
+        this.simulatedSpeed = correction + this.simulatedSpeed*this.simulatedMomentumFactor;
+        return currentValue + this.simulatedSpeed;
     }
 
     calculateAll(n) {
+        this.simulatedSpeed = 0;
         this.values = [];
         this.sumOfErrors = 0;
         var currentValue = 0;

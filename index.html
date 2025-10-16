@@ -23,13 +23,18 @@
                     <label for="kD"><p>Derivative constant (kD):</p></label>
                     <input type="text" id="kD" name="kD" placeholder="kD" value="0">
                 </div>
+                <div class="configurable-value">
+                    <label for="kFF"><p>Arbitrary feed forward constant (kFF):</p></label>
+                    <input type="text" id="kFF" name="kFF" placeholder="kFF" value="0">
+                </div>
             </div>
             <div id="graph-container">
                 <canvas></canvas>
             </div>
         </div>
 
-        <script src="/pid.js"></script>
-        <script src="/main.js"></script>
+        <script src="pid.js"></script>
+        <script src="graph.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>

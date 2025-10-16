@@ -1,43 +1,39 @@
 
 const pid = new PIDController();
 
-pid.setReference(20, 1);
-pid.kP = 1;
-pid.calculateAll(100);
+const kP_FIELD = document.getElementById("kP");
+const kI_FIELD = document.getElementById("kI");
+const iLimit_FIELD = document.getElementById("iLimit");
+const kD_FIELD = document.getElementById("kD");
+const kFF_FIELD = document.getElementById("kFF");
 
-const graphContainer = document.getElementById("graph-container");
-const canvas = graphContainer.querySelector("canvas");
-const ctx = canvas.getContext("2d");
+const CONFIGURABLE_FIELDS = [kP_FIELD, kI_FIELD, iLimit_FIELD, kD_FIELD, kFF_FIELD];
 
-const resizeObserver = new ResizeObserver((entries) => {
-    for (let entry of entries) {
-        canvas.width = entry.contentRect.width;
-        canvas.height = entry.contentRect.height;
-        drawGraph();
-    }
-});
-resizeObserver.observe(graphContainer);
-
-function drawGraph() {
-    console.log("drawing");
-
-    ctx.fillStyle = "black";
-    ctx.fill();
-
-    ctx.fillStyle = "#333333";
-    ctx.fillRect(0, canvas.height/2, canvas.width, 1.5);
-
-    ctx.strokeStyle = "red"
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height);
-    
-    var xStep = canvas.width/pid.values.length
-    var yStep = canvas.height/(pid.setpoint*2)
-    var i = 0;
-    pid.values.forEach((value) => {
-        ctx.lineTo(i*xStep, canvas.height-value*yStep);
-        i++;
-    });
-
-    ctx.stroke(); // ok who tf decided to name that function that
+function updatePidFromFields() {
+    pid.kP = Number.parseFloat(kP_FIELD.value);
+    pid.kI = Number.parseFloat(kI_FIELD.value);
+    pid.iLimit = Number.parseFloat(iLimit_FIELD.value);
+    pid.kD = Number.parseFloat(kD_FIELD.value);
+    pid.kFF = Number.parseFloat(kFF_FIELD.value);
 }
+
+CONFIGURABLE_FIELDS.forEach((field) => {
+    field.addEventListener("input", (ev) => {
+        updatePidFromFields();
+        pid.calculateAll(100);
+        drawGraph();
+    });
+});
+
+function randomizePIDSetpoint() {
+    pid.setReference(
+        Math.floor(Math.random()*50), // setpoint
+        1, // momentum
+        1, // error factor
+        0 // error offset
+    );
+    pid.calculateAll(100);
+    drawGraph();
+}
+
+randomizePIDSetpoint();

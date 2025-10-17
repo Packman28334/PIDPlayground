@@ -15,8 +15,8 @@ resizeObserver.observe(graphContainer);
 function drawGraph() {
     console.log("drawing");
 
-    ctx.fillStyle = "black";
-    ctx.fill();
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "#333333";
     ctx.fillRect(0, canvas.height/2, canvas.width, 1.5);

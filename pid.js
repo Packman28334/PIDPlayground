@@ -56,6 +56,7 @@ class PIDController {
         this.simulatedSpeed = 0;
         this.values = [];
         this.sumOfErrors = 0;
+        this.lastError = 0;
         var currentValue = 0;
         for(let i=0; i<n; i++) {
             this.values.push(currentValue);

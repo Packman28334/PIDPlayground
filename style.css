@@ -42,6 +42,11 @@ input[type=text]:focus {
     grid-row: 1;
     box-sizing: border-box;
 
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
     background-color: #121212;
     border-radius: 0px 32px 32px 0px;
 
@@ -64,6 +69,30 @@ input[type=text]:focus {
 .configurable-value input {
     margin-left: auto;
     height: 1em;
+}
+
+button {
+    border: none;
+    background-color: red;
+    margin-top: auto;
+    margin-bottom: 1em;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+button p {
+    display: inline;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+button:active {
+    transform: scale(95%);
 }
 
 #graph-container {

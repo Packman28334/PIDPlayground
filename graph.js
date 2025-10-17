@@ -21,18 +21,28 @@ function drawGraph() {
     ctx.fillStyle = "#333333";
     ctx.fillRect(0, canvas.height/2, canvas.width, 1.5);
 
+    var xStep = canvas.width/pid.values.length;
+    var yStep = canvas.height/(pid.setpoint*2)
+
     ctx.strokeStyle = "red"
     ctx.lineWidth = 1.25;
     ctx.beginPath();
     ctx.moveTo(0, canvas.height);
-    
-    var xStep = canvas.width/pid.values.length
-    var yStep = canvas.height/(pid.setpoint*2)
     var i = 0;
     pid.values.forEach((value) => {
         ctx.lineTo(i*xStep, canvas.height-value*yStep);
         i++;
     });
-
     ctx.stroke(); // ok who tf decided to name that function that
+
+    if (debug_mode) {
+        var i = 0;
+        ctx.fillStyle = "blue";
+        pid.values.forEach((value) => {
+            ctx.beginPath();
+            ctx.ellipse(i*xStep, canvas.height-value*yStep, 2, 2, 0, 0, Math.PI*2);
+            ctx.fill();
+            i++;
+        });
+    }
 }

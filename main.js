@@ -9,6 +9,8 @@ const kFF_FIELD = document.getElementById("kFF");
 
 const CONFIGURABLE_FIELDS = [kP_FIELD, kI_FIELD, iLimit_FIELD, kD_FIELD, kFF_FIELD];
 
+var debug_mode = false;
+
 function updatePidFromFields() {
     pid.kP = Number.parseFloat(kP_FIELD.value);
     pid.kI = Number.parseFloat(kI_FIELD.value);
@@ -28,7 +30,7 @@ CONFIGURABLE_FIELDS.forEach((field) => {
 function randomizePIDSetpoint() {
     pid.setReference(
         Math.floor(Math.random()*50), // setpoint
-        1, // momentum
+        0.1, // momentum
         1, // error factor
         0 // error offset
     );
